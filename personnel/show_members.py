@@ -1,5 +1,5 @@
 # =====================================================
-#  personnel/show_members.py — คนรับผิดชอบ: ______________________
+#  personnel/show_members.py — คนรับผิดชอบ: ________GAN________
 # =====================================================
 from data import family_members
 
@@ -7,6 +7,14 @@ from data import family_members
 #   - print ข้อมูลลูกน้องทุกคนใน family_members บรรทัดละคน (ชื่อ, ตำแหน่ง, ความโหด, อาวุธ)
 
 
+def show_members() :
+
+    for i in family_members :
+        print(i)    
+
 # ทดสอบ: python -m personnel.show_members
 if __name__ == "__main__":
-    show_members()   # ต้องเห็น Tony กับ Luigi คนละบรรทัด
+   show_members()   # ต้องเห็น Tony กับ Luigi คนละบรรทัด
+
+
+
