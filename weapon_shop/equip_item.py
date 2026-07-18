@@ -1,12 +1,31 @@
 # =====================================================
-#  weapon_shop/equip_item.py — คนรับผิดชอบ: ______________________
+#  weapon_shop/equip_item.py
 # =====================================================
 
-# TODO: สร้างฟังก์ชัน equip_item(person, weapon)
-#   - เช็คเงิน: เงินของ person ไม่พอราคา weapon -> ซื้อไม่ได้
-#   - เช็คอาวุธ: person มีอาวุธอยู่แล้ว (equipment ไม่ใช่ "ไม่มี") -> ใส่เพิ่มไม่ได้
-#   - ผ่านทั้งคู่ -> หักเงิน, เปลี่ยน equipment เป็นชื่ออาวุธ, บวก bonus เข้า power
-#   - return {"status": True/False, "message": ข้อความบอกผล}
+def equip_item(person, weapon):
+    # เช็คเงิน
+    if person["money"] < weapon["price"]:
+        return {
+            "status": False,
+            "message": "เงินไม่พอ"
+        }
+
+    # เช็คว่ามีอาวุธอยู่แล้วหรือไม่
+    if person["equipment"] != "ไม่มี":
+        return {
+            "status": False,
+            "message": "มีอาวุธอยู่แล้ว"
+        }
+
+    # ซื้อและติดตั้งอาวุธ
+    person["money"] -= weapon["price"]
+    person["equipment"] = weapon["name"]
+    person["power"] += weapon["bonus"]
+
+    return {
+        "status": True,
+        "message": "ติดตั้งอาวุธสำเร็จ"
+    }
 
 
 # ทดสอบ: python -m weapon_shop.equip_item
@@ -16,4 +35,4 @@ if __name__ == "__main__":
 
     print(equip_item(vito, gun))   # ต้องได้ status True
     print(vito)                    # เงินเหลือ 10000, power เป็น 10, equipment เป็นปืน
-    print(equip_item(vito, gun))   # ครั้งที่สองต้องได้ status False (มีอาวุธแล้ว)
+    print(equip_item(vito, gun))   # ครั้งที่สองต้องได้ status False
